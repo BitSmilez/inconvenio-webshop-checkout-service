@@ -5,6 +5,7 @@ import com.bitsmilez.checkoutmicroservice.core.domain.model.WebOrder;
 import com.bitsmilez.checkoutmicroservice.core.domain.service.imp.dto.WebOrderDTO;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class Mapper {
 
@@ -29,10 +30,11 @@ public class Mapper {
 
     public static WebOrder toOrderEntity(CheckoutMessage checkoutMessage) {
         WebOrder entity = new WebOrder();
-        return getOrder(entity, checkoutMessage.getAddress(), checkoutMessage.getCity(), checkoutMessage.getZip(), checkoutMessage.getCountry(), checkoutMessage.getPaymentMethod(), checkoutMessage.getShippingMethod(), checkoutMessage.getFirstName(), checkoutMessage.getLastName(), checkoutMessage.getEmail(), checkoutMessage.getPhone(), checkoutMessage.getOrderTotal());
+        return getOrder(entity, checkoutMessage.getAddress(), checkoutMessage.getCity(), checkoutMessage.getZip(), checkoutMessage.getCountry(), checkoutMessage.getPaymentMethod(), checkoutMessage.getShippingMethod(), checkoutMessage.getFirstName(), checkoutMessage.getLastName(), checkoutMessage.getEmail(), checkoutMessage.getPhone(), checkoutMessage.getOrderTotal(), UUID.fromString(checkoutMessage.getUserID()));
     }
 
-    private static WebOrder getOrder(WebOrder webOrder, String address, String city, String zip, String country, String paymentMethod, String shippingMethod, String firstName, String lastName, String email, String phone, BigDecimal orderTotal) {
+    private static WebOrder getOrder(WebOrder webOrder, String address, String city, String zip, String country, String paymentMethod, String shippingMethod, String firstName, String lastName, String email, String phone, BigDecimal orderTotal, UUID userID) {
+        webOrder.setUserID(userID);
         webOrder.setAddress(address);
         webOrder.setCity(city);
         webOrder.setZip(zip);
