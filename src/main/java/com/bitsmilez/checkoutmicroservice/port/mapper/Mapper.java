@@ -9,37 +9,22 @@ import java.math.BigDecimal;
 public class Mapper {
 
     // checkoutMessageToOrderEntity / DTO
-    public static WebOrderDTO toOrderDTO(CheckoutMessage checkoutMessage) {
+    public static WebOrderDTO toOrderDTO(WebOrder webOrder) {
+        WebOrderDTO dto = new WebOrderDTO();
+        dto.setOrderID(webOrder.getOrderID());
+        dto.setAddress(webOrder.getAddress());
+        dto.setCity(webOrder.getCity());
+        dto.setZip(webOrder.getZip());
+        dto.setCountry(webOrder.getCountry());
+        dto.setPaymentMethod(webOrder.getPaymentMethod());
+        dto.setShippingMethod(webOrder.getShippingMethod());
+        dto.setFirstName(webOrder.getFirstName());
+        dto.setLastName(webOrder.getLastName());
+        dto.setEmail(webOrder.getEmail());
+        dto.setPhone(webOrder.getPhone());
+        dto.setOrderTotal(webOrder.getOrderTotal());
+        return dto;
 
-       WebOrderDTO dto = new WebOrderDTO();
-       dto.setAddress(checkoutMessage.getAddress());
-       dto.setCity(checkoutMessage.getCity());
-       dto.setZip(checkoutMessage.getZip());
-       dto.setCountry(checkoutMessage.getCountry());
-       dto.setPaymentMethod(checkoutMessage.getPaymentMethod());
-       dto.setShippingMethod(checkoutMessage.getShippingMethod());
-       dto.setFirstName(checkoutMessage.getFirstName());
-       dto.setLastName(checkoutMessage.getLastName());
-       dto.setEmail(checkoutMessage.getEmail());
-       dto.setPhone(checkoutMessage.getPhone());
-       dto.setOrderTotal(checkoutMessage.getOrderTotal());
-
-       return dto;
-    }
-
-    public static WebOrder toOrderEntity(WebOrderDTO webOrderDTO, boolean orderID, boolean orderDate) {
-
-        WebOrder entity = new WebOrder();
-        if (orderID){
-           entity.setOrderID(webOrderDTO.getOrderID());
-        }
-
-        if (orderDate){
-           entity.setOrderDate(webOrderDTO.getOrderDate());
-        }
-
-        return getOrder(entity, webOrderDTO.getAddress(), webOrderDTO.getCity(), webOrderDTO.getZip(), webOrderDTO.getCountry(),
-                webOrderDTO.getPaymentMethod(), webOrderDTO.getShippingMethod(), webOrderDTO.getFirstName(), webOrderDTO.getLastName(), webOrderDTO.getEmail(), webOrderDTO.getPhone(), webOrderDTO.getOrderTotal());
     }
 
     public static WebOrder toOrderEntity(CheckoutMessage checkoutMessage) {
