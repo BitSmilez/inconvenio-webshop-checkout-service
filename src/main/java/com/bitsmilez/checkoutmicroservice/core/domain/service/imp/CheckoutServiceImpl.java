@@ -25,8 +25,13 @@ public class CheckoutServiceImpl implements ICheckoutService {
     @Override
     public boolean createOrder(CheckoutMessage checkoutMessage) {
         WebOrder webOrder = Mapper.toOrderEntity(checkoutMessage);
-        orderRepository.save(webOrder);
-        return true;
+        try {
+            orderRepository.save(webOrder);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
 
 
     }
