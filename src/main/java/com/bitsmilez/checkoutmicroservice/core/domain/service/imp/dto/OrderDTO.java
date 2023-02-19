@@ -19,5 +19,6 @@ public class OrderDTO {
     private String email;
     private String phone;
     private BigDecimal orderTotal;
+    private String data;
 
 }

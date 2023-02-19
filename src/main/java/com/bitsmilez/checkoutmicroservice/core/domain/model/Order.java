@@ -26,5 +26,6 @@ public class Order {
     private String email;
     private String phone;
     private BigDecimal orderTotal;
+    private String orderDate = java.time.Instant.now().toString();
 
 }
