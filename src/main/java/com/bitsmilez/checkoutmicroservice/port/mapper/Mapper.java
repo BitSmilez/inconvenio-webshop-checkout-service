@@ -24,6 +24,7 @@ public class Mapper {
         dto.setEmail(webOrder.getEmail());
         dto.setPhone(webOrder.getPhone());
         dto.setOrderTotal(webOrder.getOrderTotal());
+        dto.setOrderDate(webOrder.getOrderDate());
         return dto;
 
     }
