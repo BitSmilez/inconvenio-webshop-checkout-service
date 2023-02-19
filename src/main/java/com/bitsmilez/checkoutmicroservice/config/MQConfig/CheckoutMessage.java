@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -24,6 +25,7 @@ public class CheckoutMessage {
     private String email;
     private String phone;
     private BigDecimal orderTotal;
-    private List<String> products;
+    private List<Map<String, Integer>> products;
+
 }
 
