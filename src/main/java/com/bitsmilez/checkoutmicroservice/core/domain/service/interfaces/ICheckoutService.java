@@ -1,7 +1,7 @@
 package com.bitsmilez.checkoutmicroservice.core.domain.service.interfaces;
 
 import com.bitsmilez.checkoutmicroservice.config.MQConfig.CheckoutMessage;
-import com.bitsmilez.checkoutmicroservice.core.domain.service.imp.dto.OrderDTO;
+import com.bitsmilez.checkoutmicroservice.core.domain.service.imp.dto.WebOrderDTO;
 
 import java.util.UUID;
 
@@ -11,9 +11,9 @@ public interface ICheckoutService {
     boolean createOrder(CheckoutMessage checkoutMessage);
 
     // GetLatestCheckout (UserID)
-    OrderDTO getLatestCheckout(UUID userID);
+    WebOrderDTO getLatestCheckout(UUID userID);
 
     // GetAllCheckouts (UserID)
-    OrderDTO getAllCheckouts(UUID userID);
+    WebOrderDTO getAllCheckouts(UUID userID);
 
 }

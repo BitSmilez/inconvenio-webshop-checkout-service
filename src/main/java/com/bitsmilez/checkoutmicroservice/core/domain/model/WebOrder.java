@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Data
 @Entity
-public class Order {
+public class WebOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID orderID;

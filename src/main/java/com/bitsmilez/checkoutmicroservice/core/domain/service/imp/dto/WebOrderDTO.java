@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Data
-public class OrderDTO {
+public class WebOrderDTO {
     private UUID orderID;
     private String address;
     private String city;

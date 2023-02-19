@@ -1,8 +1,8 @@
 package com.bitsmilez.checkoutmicroservice.core.domain.service.imp;
 
 import com.bitsmilez.checkoutmicroservice.config.MQConfig.CheckoutMessage;
-import com.bitsmilez.checkoutmicroservice.core.domain.model.Order;
-import com.bitsmilez.checkoutmicroservice.core.domain.service.imp.dto.OrderDTO;
+import com.bitsmilez.checkoutmicroservice.core.domain.model.WebOrder;
+import com.bitsmilez.checkoutmicroservice.core.domain.service.imp.dto.WebOrderDTO;
 import com.bitsmilez.checkoutmicroservice.core.domain.service.interfaces.ICheckoutService;
 import com.bitsmilez.checkoutmicroservice.core.domain.service.interfaces.IOrderRepository;
 import com.bitsmilez.checkoutmicroservice.port.mapper.Mapper;
@@ -24,8 +24,8 @@ public class CheckoutServiceImpl implements ICheckoutService {
 
     @Override
     public boolean createOrder(CheckoutMessage checkoutMessage) {
-        Order order = Mapper.toOrderEntity(checkoutMessage);
-        orderRepository.save(order);
+        WebOrder webOrder = Mapper.toOrderEntity(checkoutMessage);
+        orderRepository.save(webOrder);
         return true;
 
 
@@ -34,13 +34,13 @@ public class CheckoutServiceImpl implements ICheckoutService {
 
 
     @Override
-    public OrderDTO getLatestCheckout(UUID userID) {
+    public WebOrderDTO getLatestCheckout(UUID userID) {
         return null;
 
     }
 
     @Override
-    public OrderDTO getAllCheckouts(UUID userID) {
+    public WebOrderDTO getAllCheckouts(UUID userID) {
         return null;
 
     }
