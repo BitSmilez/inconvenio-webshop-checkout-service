@@ -7,6 +7,7 @@ import com.bitsmilez.checkoutmicroservice.core.domain.service.interfaces.IChecko
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
@@ -23,13 +24,13 @@ public class CheckoutConsumer {
 
 
     @RabbitListener(queues = MQConfig.CHECKOUT_QUEUE)
-    public ResponseEntity<?> receiveCheckoutMessage(CheckoutMessage message) {
+    public Integer receiveCheckoutMessage(CheckoutMessage message) {
 
         LOGGER.info("Received message: {}", message);
         if (checkoutService.createOrder(message)){
-            return ResponseEntity.ok().build();
+            return HttpStatus.OK.value();
         } else {
-            return ResponseEntity.badRequest().build();
+            return HttpStatus.INTERNAL_SERVER_ERROR.value();
         }
 
     }
