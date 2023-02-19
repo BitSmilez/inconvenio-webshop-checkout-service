@@ -15,6 +15,7 @@ public class WebOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID orderID;
+    private UUID userID;
     private String address;
     private String city;
     private String zip;
@@ -26,6 +27,6 @@ public class WebOrder {
     private String email;
     private String phone;
     private BigDecimal orderTotal;
-    private String orderDate = java.time.Instant.now().toString();
+    private String orderDate = java.time.Instant.now().atZone(java.time.ZoneId.of("Europe/Amsterdam")).toLocalDateTime().toString();
 
 }
