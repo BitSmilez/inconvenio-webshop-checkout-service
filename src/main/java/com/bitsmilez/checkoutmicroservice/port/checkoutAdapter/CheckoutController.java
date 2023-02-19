@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -31,6 +32,18 @@ public class CheckoutController {
     }
 
     // TODO GET -> All Orders (UserID)
+    @GetMapping(value = "/checkout/all/{userID}")
+    public ResponseEntity<List<WebOrderDTO>> getAllOrders(@PathVariable(name = "userID") String userID) {
+        UUID id = UUID.fromString(userID);
+        List<WebOrderDTO> order = checkoutService.getAllCheckouts(id);
+        if (order.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(order);
+
+        }
+
+    }
 
 
 }
