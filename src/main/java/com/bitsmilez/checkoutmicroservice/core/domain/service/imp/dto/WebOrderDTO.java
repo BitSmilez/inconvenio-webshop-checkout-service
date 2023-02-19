@@ -3,6 +3,7 @@ package com.bitsmilez.checkoutmicroservice.core.domain.service.imp.dto;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -20,5 +21,6 @@ public class WebOrderDTO {
     private String phone;
     private BigDecimal orderTotal;
     private String orderDate;
+    private List <ProductDTO> products;
 
 }
