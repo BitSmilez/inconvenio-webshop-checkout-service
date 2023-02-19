@@ -9,6 +9,7 @@ import com.bitsmilez.checkoutmicroservice.port.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -40,7 +41,12 @@ public class CheckoutServiceImpl implements ICheckoutService {
 
     @Override
     public WebOrderDTO getLatestCheckout(UUID userID) {
-        return null;
+        List<WebOrder> orders = orderRepository.findAllByUserIDOrderByOrderDateDesc(userID);
+        if (orders.isEmpty()){
+            return null;
+        }
+        WebOrder order = orders.get(0);
+        return Mapper.toOrderDTO(order);
 
     }
 
