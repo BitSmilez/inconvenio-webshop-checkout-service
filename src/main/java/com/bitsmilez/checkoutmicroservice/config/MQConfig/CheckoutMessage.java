@@ -1,11 +1,11 @@
 package com.bitsmilez.checkoutmicroservice.config.MQConfig;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
 
 @Data
@@ -25,7 +25,7 @@ public class CheckoutMessage {
     private String email;
     private String phone;
     private BigDecimal orderTotal;
-    private List<Map<String, Integer>> products;
+    private Map<String, Integer> products;
 
 }
 
