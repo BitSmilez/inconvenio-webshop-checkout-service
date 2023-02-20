@@ -20,7 +20,6 @@ public class CheckoutController {
         this.checkoutService = checkoutService;
     }
 
-    // TODO: GET -> last order (UserID)
     @GetMapping(value = "/checkout/latest/{userID}")
     public ResponseEntity<WebOrderDTO> getLastOrder(@PathVariable(name = "userID") String userID) {
         UUID id = UUID.fromString(userID);
@@ -33,7 +32,6 @@ public class CheckoutController {
 
     }
 
-    // TODO GET -> All Orders (UserID)
     @GetMapping(value = "/checkout/all/{userID}")
     public ResponseEntity<List<WebOrderDTO>> getAllOrders(@PathVariable(name = "userID") String userID) {
         UUID id = UUID.fromString(userID);
