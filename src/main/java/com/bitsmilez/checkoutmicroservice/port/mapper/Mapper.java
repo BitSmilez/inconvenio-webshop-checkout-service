@@ -1,10 +1,15 @@
 package com.bitsmilez.checkoutmicroservice.port.mapper;
 
 import com.bitsmilez.checkoutmicroservice.config.MQConfig.CheckoutMessage;
+import com.bitsmilez.checkoutmicroservice.core.domain.model.Product;
+import com.bitsmilez.checkoutmicroservice.core.domain.model.ProductID;
 import com.bitsmilez.checkoutmicroservice.core.domain.model.WebOrder;
 import com.bitsmilez.checkoutmicroservice.core.domain.service.imp.dto.WebOrderDTO;
 
 import java.math.BigDecimal;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class Mapper {
@@ -32,6 +37,18 @@ public class Mapper {
     public static WebOrder toOrderEntity(CheckoutMessage checkoutMessage) {
         WebOrder entity = new WebOrder();
         return getOrder(entity, checkoutMessage.getAddress(), checkoutMessage.getCity(), checkoutMessage.getZip(), checkoutMessage.getCountry(), checkoutMessage.getPaymentMethod(), checkoutMessage.getShippingMethod(), checkoutMessage.getFirstName(), checkoutMessage.getLastName(), checkoutMessage.getEmail(), checkoutMessage.getPhone(), checkoutMessage.getOrderTotal(), UUID.fromString(checkoutMessage.getUserID()));
+    }
+
+    public static List<Product> toProductEntity(CheckoutMessage checkoutMessage,UUID cartID) {
+        LinkedList<Product> products = new LinkedList<>();
+       for (Map.Entry<String, Integer> entry : checkoutMessage.getProducts().entrySet()) {
+           Product product = new Product();
+           ProductID id = new ProductID(UUID.fromString(entry.getKey()),cartID );
+           product.setProductID(id);
+           product.setQuantity(entry.getValue());
+           products.add(product);
+       }
+       return products;
     }
 
     private static WebOrder getOrder(WebOrder webOrder, String address, String city, String zip, String country, String paymentMethod, String shippingMethod, String firstName, String lastName, String email, String phone, BigDecimal orderTotal, UUID userID) {
