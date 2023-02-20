@@ -5,6 +5,7 @@ import com.bitsmilez.checkoutmicroservice.core.domain.model.WebOrder;
 import com.bitsmilez.checkoutmicroservice.core.domain.service.imp.dto.WebOrderDTO;
 import com.bitsmilez.checkoutmicroservice.core.domain.service.interfaces.ICheckoutService;
 import com.bitsmilez.checkoutmicroservice.core.domain.service.interfaces.IOrderRepository;
+import com.bitsmilez.checkoutmicroservice.core.domain.service.interfaces.IProductRepository;
 import com.bitsmilez.checkoutmicroservice.port.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,13 @@ import java.util.UUID;
 public class CheckoutServiceImpl implements ICheckoutService {
     @Autowired
     IOrderRepository orderRepository;
+    @Autowired
+    IProductRepository productRepository;
 
-    public CheckoutServiceImpl(IOrderRepository orderRepository) {
+    public CheckoutServiceImpl(IOrderRepository orderRepository, IProductRepository productRepository) {
         super();
         this.orderRepository = orderRepository;
+        this.productRepository = productRepository;
     }
 
 
@@ -28,7 +32,8 @@ public class CheckoutServiceImpl implements ICheckoutService {
     public boolean createOrder(CheckoutMessage checkoutMessage) {
         WebOrder webOrder = Mapper.toOrderEntity(checkoutMessage);
         try {
-            orderRepository.save(webOrder);
+            UUID orderID = orderRepository.save(webOrder).getOrderID();
+             productRepository.saveAll(Mapper.toProductEntity(checkoutMessage, orderID));
             return true;
         } catch (Exception e) {
             return false;
