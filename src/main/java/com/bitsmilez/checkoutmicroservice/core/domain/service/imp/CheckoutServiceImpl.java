@@ -1,6 +1,7 @@
 package com.bitsmilez.checkoutmicroservice.core.domain.service.imp;
 
 import com.bitsmilez.checkoutmicroservice.config.MQConfig.CheckoutMessage;
+import com.bitsmilez.checkoutmicroservice.core.domain.model.Product;
 import com.bitsmilez.checkoutmicroservice.core.domain.model.WebOrder;
 import com.bitsmilez.checkoutmicroservice.core.domain.service.imp.dto.WebOrderDTO;
 import com.bitsmilez.checkoutmicroservice.core.domain.service.interfaces.ICheckoutService;
@@ -51,8 +52,10 @@ public class CheckoutServiceImpl implements ICheckoutService {
         if (orders.isEmpty()){
             return null;
         }
-        WebOrder order = orders.get(0);
-        return Mapper.toOrderDTO(order);
+        WebOrderDTO order = Mapper.toOrderDTO(orders.get(0));
+        List<Product> products = (productRepository.findByProductID_OrderID(order.getOrderID()));
+        products.forEach(product -> order.addProduct(product.getProductID().getProductID(), product.getQuantity()));
+        return (order);
 
     }
 
