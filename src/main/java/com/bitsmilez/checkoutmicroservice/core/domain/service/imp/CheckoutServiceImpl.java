@@ -61,14 +61,18 @@ public class CheckoutServiceImpl implements ICheckoutService {
 
     @Override
     public List<WebOrderDTO> getAllCheckouts(UUID userID) {
-            List <WebOrder> orders = orderRepository.findAllByUserIDOrderByOrderDateDesc(userID);
-            if (orders.isEmpty()){
-                return new ArrayList<>();
-            }
-            return orders.stream().map(Mapper::toOrderDTO).toList();
+        List<WebOrder> orders = orderRepository.findAllByUserIDOrderByOrderDateDesc(userID);
+        if (orders.isEmpty()) {
+            return new ArrayList<>();
+        }
+        List<WebOrderDTO> orderDTOList = orders.stream().map(Mapper::toOrderDTO).toList();
+        for (WebOrderDTO order : orderDTOList) {
+            List<Product> products = (productRepository.findByProductID_OrderID(order.getOrderID()));
+            products.forEach(product -> order.addProduct(product.getProductID().getProductID(), product.getQuantity()));
 
         }
-
+        return orderDTOList;
+    }
 
 
 }
