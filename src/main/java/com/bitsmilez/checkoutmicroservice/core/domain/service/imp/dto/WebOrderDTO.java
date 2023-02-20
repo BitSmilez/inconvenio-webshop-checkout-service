@@ -3,7 +3,7 @@ package com.bitsmilez.checkoutmicroservice.core.domain.service.imp.dto;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.Map;
+import java.util.HashMap;
 import java.util.UUID;
 
 @Data
@@ -21,7 +21,7 @@ public class WebOrderDTO {
     private String phone;
     private BigDecimal orderTotal;
     private String orderDate;
-    private Map<UUID,Integer> products;
+    private HashMap<UUID,Integer> products = new HashMap<>();
 
     public void addProduct(UUID productID, Integer quantity){
         products.put(productID,quantity);
