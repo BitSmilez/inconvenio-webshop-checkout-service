@@ -45,9 +45,7 @@ class CheckoutControllerTest {
     @BeforeEach
     public void setup() {
 
-        // this must be called for the @Mock annotations above to be processed
-        // and for the mock service to be injected into the controller under
-        // test.
+
         MockitoAnnotations.openMocks(this);
 
         this.mockMvc = MockMvcBuilders.standaloneSetup(controllerUnderTest).build();
@@ -80,38 +78,7 @@ class CheckoutControllerTest {
         webOrderDTO.setProducts(products2);
 
     }
-       /* @Test
-        void getLastOrder() {
-             String userID = "1234";
-             String address = "Test address";
-             String city = "Test city";
-             String zip = "1234";
-             String country = "Test country";
-             String paymentMethod = "Test payment method";
-             String shippingMethod = "Test shipping method";
-             String firstName = "Test first name";
-             String lastName = "Test last name";
-             String email = "Test email";
-             String phone = "Test phone";
-             BigDecimal orderTotal = new BigDecimal(1234);
-             UUID productID = UUID.randomUUID();
-             UUID productID2 = UUID.randomUUID();
-             Map<String, Integer> products = new HashMap<>();
-                products.put(productID.toString(), 1);
-                products.put(productID2.toString(), 2);
 
-            HashMap<UUID,Integer> products2 = new HashMap<>();
-                products2.put(productID, 1);
-                products2.put(productID2, 2);
-            CheckoutMessage checkoutMessage = new CheckoutMessage(userID, address, city, zip, country, paymentMethod, shippingMethod, firstName, lastName, email, phone, orderTotal, products);
-            WebOrder order = Mapper.toOrderEntity(checkoutMessage);
-            WebOrderDTO orderDTO = Mapper.toOrderDTO(order);
-            orderDTO.setProducts(products2);
-
-
-            fail();
-
-        }*/
     @Test
     void getLastOrderUnknown() throws Exception {
 
