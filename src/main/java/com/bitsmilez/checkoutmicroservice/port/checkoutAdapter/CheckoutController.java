@@ -4,6 +4,7 @@ import com.bitsmilez.checkoutmicroservice.core.domain.service.imp.dto.WebOrderDT
 import com.bitsmilez.checkoutmicroservice.core.domain.service.interfaces.ICheckoutService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:3000")
 public class CheckoutController {
     private final ICheckoutService checkoutService;
 
