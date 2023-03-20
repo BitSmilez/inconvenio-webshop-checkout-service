@@ -1,12 +1,16 @@
 package com.bitsmilez.checkoutmicroservice.core.domain.service.imp.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.UUID;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class WebOrderDTO {
     private UUID orderID;
     private String address;
