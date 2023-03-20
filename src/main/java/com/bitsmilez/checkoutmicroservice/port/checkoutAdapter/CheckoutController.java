@@ -31,6 +31,7 @@ public class CheckoutController {
         }
 
     }
+
     @GetMapping(value = "/checkout/all/{userID}")
     public ResponseEntity<List<WebOrderDTO>> getAllOrders(@PathVariable(name = "userID") String userID) {
         UUID id = UUID.fromString(userID);
